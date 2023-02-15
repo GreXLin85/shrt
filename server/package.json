@@ -5,6 +5,19 @@
   "main": "app.js",
   "author": "GreXLin85",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node --files src/app.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --files src/app.ts",
+    "test": "jest",
+    "build": "tsc",
+    "migrate": "prisma migrate dev --name init",
+    "migrate:reset": "prisma migrate reset",
+    "docker:start": "ts-node app.ts",
+    "docker:compose:up": "docker-compose up -d --build --remove-orphans",
+    "docker:compose:down": "docker-compose down",
+    "docker:compose:logs": "docker-compose logs -f",
+    "docker:compose:ps": "docker-compose ps"
+  },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.13.0",
@@ -15,6 +28,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.10.1",
+    "@types/randomstring": "^1.1.8",
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "randomstring": "^1.2.3"
