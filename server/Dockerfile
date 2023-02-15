@@ -5,16 +5,16 @@ FROM node:alpine as development
 WORKDIR /app
 
 # COPY package.json and yarn.lock files
-COPY ./package.json ./yarn.lock ./
+COPY ./server/package.json ./server/yarn.lock ./
 
 # Install package.json dependencies
 RUN yarn install
 RUN yarn cache clean
 
 # COPY in order 1. tsconfig.json 2. prisma folder 3. src folder
-COPY ./tsconfig.json ./
-COPY ./prisma ./prisma
-COPY ./src ./
+COPY ./server/tsconfig.json ./
+COPY ./server/prisma ./prisma
+COPY ./server/src ./
 
 # Generate prisma client
 RUN npx prisma generate
