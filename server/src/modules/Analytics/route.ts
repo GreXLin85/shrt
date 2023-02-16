@@ -5,7 +5,7 @@ export class AnalyticsRoute {
     private controller = new AnalyticsController();
 
     public routes(app: Application): void {
-        app.route('/analytics/:id')
+        app.route('/analytics/:linkId')
             .get(this.controller.getAnalytics)
     }
 }
