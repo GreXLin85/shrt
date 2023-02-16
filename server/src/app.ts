@@ -1,25 +1,12 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import { TypedRequestBody } from './types/TypedRequestBody';
+import { LinkRoute } from './modules/Link/route';
 
 const app = express();
 
 app.use(bodyParser.json())
 
-app.post('/shorturl', (req: TypedRequestBody<{
-    url: string;
-}>, res) => {
-    const url = req.body.url
-
-    // check if url valid with this regex https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)
-
-    if(!new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/g).test(url)){
-        res.status(400).send('Invalid url')
-    }
-        
-
-    res.send(url);
-});
+new LinkRoute().routes(app)
 
 const PORT = process.env.SERVER_PORT || 3000;
 app.listen(PORT, () => {
