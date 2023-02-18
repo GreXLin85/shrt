@@ -2,9 +2,10 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import { AnalyticsRoute } from './modules/Analytics/route';
 import { LinkRoute } from './modules/Link/route';
-
+import cors from 'cors';
 const app = express();
 
+app.use(cors())
 app.use(bodyParser.json())
 
 new LinkRoute().routes(app)
