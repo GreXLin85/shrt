@@ -37,6 +37,11 @@ function App() {
     fetch("http://localhost:3000/createLink", requestOptions)
       .then(response => response.json())
       .then(result => {
+        if (!result.message.accessToken) {
+          return showNotification({
+            message: result.message,
+          });
+        }
         setValue(`http://localhost:3000/${result.message.accessToken}`);
         showNotification({
           message: "Your URL Shortened and Copied!",
