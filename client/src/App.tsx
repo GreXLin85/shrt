@@ -37,10 +37,10 @@ function App() {
     fetch("http://localhost:3000/createLink", requestOptions)
       .then(response => response.json())
       .then(result => {
+        setValue(`http://localhost:3000/${result.message.accessToken}`);
         showNotification({
           message: "Your URL Shortened and Copied!",
         });
-        setValue(`http://localhost:3000/${result.message.accessToken}`);
         clipboard.copy(value);
         (inputReference?.current as any).select();
 
